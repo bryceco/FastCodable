@@ -130,3 +130,15 @@ extension Double: FastCodable {
 		self.init(v)
 	}
 }
+
+extension Float: FastCodable {
+	public func fastEncode(to encoder: FastEncoder) {
+		encoder.appendBytes(of: self)
+	}
+
+	public init(fromFast decoder: FastDecoder) throws {
+		var v = Self()
+		try decoder.readBytes(into: &v)
+		self.init(v)
+	}
+}

@@ -16,7 +16,7 @@ public final class FastEncoder {
 
 	static let Terminator: UInt64 = 0xDEADBEEF0000AA99
 
-	init() {
+	public init() {
 		data = Data()
 	}
 
