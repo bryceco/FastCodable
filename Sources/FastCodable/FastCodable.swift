@@ -40,7 +40,7 @@ extension Array: FastCodable where Element: FastCodable {
 
 	public init(fromFast decoder: FastDecoder) throws {
 		self.init()
-		let count = try Self.Index(fromFast: decoder)
+		let count = try Int(fromFast: decoder)
 		reserveCapacity(count)
 		for _ in 0..<count {
 			let decoded = try Element(fromFast: decoder)
