@@ -23,12 +23,16 @@ public final class FastEncoder {
 	public static func encode<T: FastEncodable>(_ value: T) -> Data {
 		let encoder = FastEncoder()
 		value.fastEncode(to: encoder)
-		Self.Terminator.fastEncode(to: encoder)
-		return encoder.data
+		return encoder.finish()
 	}
 
 	public func encode<T: FastEncodable>(_ value: T) {
 		value.fastEncode(to: self)
+	}
+
+	public func finish() -> Data {
+		Self.Terminator.fastEncode(to: self)
+		return data
 	}
 
 	@inline(__always)
