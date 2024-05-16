@@ -32,7 +32,7 @@ extension Optional: FastCodable where Wrapped: FastCodable {
 
 extension Array: FastCodable where Element: FastCodable {
 	public func fastEncode(to encoder: FastEncoder) {
-		count.fastEncode(to: encoder)
+		UInt32(count).fastEncode(to: encoder)
 		for element in self {
 			element.fastEncode(to: encoder)
 		}
@@ -40,8 +40,8 @@ extension Array: FastCodable where Element: FastCodable {
 
 	public init(fromFast decoder: FastDecoder) throws {
 		self.init()
-		let count = try Int(fromFast: decoder)
-		reserveCapacity(count)
+		let count = try UInt32(fromFast: decoder)
+		reserveCapacity(Int(count))
 		for _ in 0..<count {
 			let decoded = try Element(fromFast: decoder)
 			append(decoded)
